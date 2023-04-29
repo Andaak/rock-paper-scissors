@@ -47,6 +47,12 @@ function game() {
     while (playerScore < 5 && computerScore < 5);
 }
 
+function addDom(playGame, choice) {
+    const result = playGame(choice, getComputerChoice());
+    const div = document.createElement('div');
+    div.textContent = result;
+    buttons.appendChild(div);
+}
 
 
 const container = document.querySelector('body');
@@ -60,18 +66,23 @@ rock.textContent = 'Rock';
 buttons.appendChild(rock);
 rock.addEventListener(
     'click',
-    () => console.log(playRound('Rock', getComputerChoice()))
-);
+    () => addDom(playRound, 'Rock'));
 
 const paper = document.createElement('button');
 paper.id = 'paper';
 paper.textContent = 'Paper';
 buttons.appendChild(paper);
+paper.addEventListener(
+    'click',
+    () => addDom(playRound, 'Paper'));
 
 const scissors = document.createElement('button');
 scissors.id = 'scissors';
 scissors.textContent = 'Scissors';
 buttons.appendChild(scissors);
+scissors.addEventListener(
+    'click',
+    () => addDom(playRound, 'Scissors'));
 
 
 container.appendChild(buttons);
