@@ -1,3 +1,7 @@
+let playerScore = 0;
+let computerScore = 0;
+
+
 function getComputerChoice() {
     let choice = Math.ceil(Math.random() * 9);
 
@@ -11,6 +15,7 @@ function getComputerChoice() {
         return 'Paper';
     }
 }
+
 
 function playRound(playerSelection, computerSelection) {
     if (playerSelection.toLowerCase() === computerSelection.toLowerCase()) {
@@ -30,28 +35,27 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-function game() {
-    let playerScore = 0;
-    let computerScore = 0;
-    do {
-        let playerInput = prompt("Make your choice: Rock, Paper or Scissors");
-        let computerChoice = getComputerChoice();
-        let result = playRound(playerInput, computerChoice);
-        if (result.includes('Win')) {
-            playerScore++;
-        } else if (result.includes('Lose')) {
-            computerScore++
-        }
-        alert(`${result}\n\nYour score: ${playerScore}\nComputer score: ${computerScore}`)
-    }
-    while (playerScore < 5 && computerScore < 5);
-}
 
 function addDom(playGame, choice) {
     const result = playGame(choice, getComputerChoice());
+    if (result.includes('Win')) playerScore++;
+    else if (result.includes('Lose')) computerScore++;
     const div = document.createElement('div');
     div.textContent = result;
-    buttons.appendChild(div);
+    gameLog.appendChild(div);
+    console.log(playerScore, computerScore)
+    if (playerScore >= 5) {
+        alert('Player wins!')
+        playerScore = 0;
+        computerScore = 0;
+        gameLog.textContent = '';
+    }
+    else if (computerScore >= 5) {
+        alert('Computer wins!')
+        playerScore = 0;
+        computerScore = 0;
+        gameLog.textContent = '';
+    }
 }
 
 
@@ -59,6 +63,9 @@ const container = document.querySelector('body');
 
 const buttons = document.createElement('div');
 buttons.classList.add('buttons');
+
+const gameLog = document.createElement('div');
+gameLog.classList.add('gameLog')
 
 const rock = document.createElement('button');
 rock.id = 'rock';
@@ -86,5 +93,4 @@ scissors.addEventListener(
 
 
 container.appendChild(buttons);
-
-// game();
+container.appendChild(gameLog);
