@@ -47,4 +47,33 @@ function game() {
     while (playerScore < 5 && computerScore < 5);
 }
 
-game();
+
+
+const container = document.querySelector('body');
+
+const buttons = document.createElement('div');
+buttons.classList.add('buttons');
+
+const rock = document.createElement('button');
+rock.id = 'rock';
+rock.textContent = 'Rock';
+buttons.appendChild(rock);
+rock.addEventListener(
+    'click',
+    () => console.log(playRound('Rock', getComputerChoice()))
+);
+
+const paper = document.createElement('button');
+paper.id = 'paper';
+paper.textContent = 'Paper';
+buttons.appendChild(paper);
+
+const scissors = document.createElement('button');
+scissors.id = 'scissors';
+scissors.textContent = 'Scissors';
+buttons.appendChild(scissors);
+
+
+container.appendChild(buttons);
+
+// game();
