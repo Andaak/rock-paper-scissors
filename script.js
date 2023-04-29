@@ -43,7 +43,6 @@ function addDom(playGame, choice) {
     const div = document.createElement('div');
     div.textContent = result;
     gameLog.appendChild(div);
-    console.log(playerScore, computerScore)
     if (playerScore >= 5) {
         alert('Player wins!')
         playerScore = 0;
