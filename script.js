@@ -37,23 +37,25 @@ function playRound(playerSelection, computerSelection) {
 
 
 function addDom(playGame, choice) {
+    gameLog.textContent = '';
     const result = playGame(choice, getComputerChoice());
     if (result.includes('Win')) playerScore++;
     else if (result.includes('Lose')) computerScore++;
     const div = document.createElement('div');
     div.textContent = result;
+    const score = document.createElement('div');
+    score.textContent = `Player: ${playerScore}\nComputer: ${computerScore}`
+    gameLog.appendChild(score);
     gameLog.appendChild(div);
     if (playerScore >= 5) {
         alert('Player wins!')
         playerScore = 0;
         computerScore = 0;
-        gameLog.textContent = '';
     }
     else if (computerScore >= 5) {
         alert('Computer wins!')
         playerScore = 0;
         computerScore = 0;
-        gameLog.textContent = '';
     }
 }
 
